@@ -32,3 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 .idea/
+
+### Bootcamp slide photos ###
+IMG_*.jpg
+IMG_*.jpeg
+IMG_*.png

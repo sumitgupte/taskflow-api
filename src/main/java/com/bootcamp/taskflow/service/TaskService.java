@@ -9,13 +9,6 @@ import java.util.Objects;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 
-/**
- * NOTE FOR BOOTCAMP FACILITATORS: This class intentionally contains a few realistic rough edges: 1.
- * getTasksForUser() re-filters and re-sorts the full task list on every call, with no pagination -
- * fine at 4 tasks, a real problem at 40,000. Good target for the "Implement" lab. 2. No validation
- * on title length or dueDate format. 3. Tag filtering is a case-sensitive exact match only. These
- * are left as-is on purpose - do not "clean them up" before the session.
- */
 @Service
 public class TaskService {
 
@@ -35,8 +28,6 @@ public class TaskService {
     if (tag != null && !tag.isBlank()) {
       result.removeIf(task -> !task.getTags().contains(tag));
     }
-    // Sorts by due date on every single call, string-compare on
-    // possibly-null dates.
     result.sort(Comparator.comparing(t -> t.getDueDate() == null ? "" : t.getDueDate()));
     return result;
   }

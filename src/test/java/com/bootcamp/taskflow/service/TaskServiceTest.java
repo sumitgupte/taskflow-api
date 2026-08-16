@@ -9,12 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * NOTE: Coverage here is thin on purpose. There are no tests for: - filtering by tag - updateTask -
- * deleteTask - addTask validation (missing title) Leave gaps as-is; they're useful for the
- * "Implement" lab, where participants generate tests for a plan step using Copilot.
- *
- * <p>This is a plain unit test with no Spring context - TaskService only depends on
- * InMemoryDatabase, so there's no need to boot the application just to exercise this logic.
+ * Plain unit test with no Spring context - TaskService only depends on InMemoryDatabase, so there
+ * is no need to boot the application to exercise this logic.
  */
 class TaskServiceTest {
 
