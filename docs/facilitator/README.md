@@ -57,13 +57,34 @@ Each exercise branch is an **independent snapshot off `main`**, containing
 everything that exercise presupposes. Nobody needs to have finished Ex 1 to
 start Ex 2.
 
-| Branch | Has instructions? | Has PROJECT_OVERVIEW? | Has guidelines? | Has prompt files? |
-|--------|-------------------|----------------------|-----------------|-------------------|
+| Branch | Instructions | PROJECT_OVERVIEW | Guidelines | Prompt files |
+|--------|--------------|------------------|------------|--------------|
 | `exercise-1` | ✗ | ✗ | ✗ | ✗ |
 | `exercise-2` | ✗ | ✗ | ✗ | ✗ |
 | `exercise-3` | ✓ | ✓ | ✗ *(they write it)* | ✗ |
 | `exercise-4` | ✓ | ✓ | ✓ | ✓ |
 | `main` | ✓ | ✓ | ✓ | ✓ + this guide |
+
+Each branch also carries **only its own handout and its own ticket(s)**. This is
+deliberate: someone who reads the Exercise 4 handout while sitting in Exercise 2
+already knows the punchline, and the day's arc depends on Exercise 2 failing
+before Exercise 3 explains it.
+
+| Branch | Handout | Tickets | Cheat-sheet |
+|--------|---------|---------|-------------|
+| `exercise-1` | `exercise-1.md` | *none — no ticket in this exercise* | ✗ |
+| `exercise-2` | `exercise-2.md` | `audit-log.md` | ✗ |
+| `exercise-3` | `exercise-3.md` | `audit-log.md` | ✗ |
+| `exercise-4` | `exercise-4.md` | `reminders.md`, `rate-limiting.md`, `task-listing-performance.md` | ✓ |
+| `main` | all four | all four | ✓ |
+
+`docs/copilot-prompt-cheatsheet.md` is scoped to `exercise-4` for the same
+reason — it lays out refine → plan → implement in full, which is Exercise 4's
+content. Hand it out at the end of the day as the thing people keep.
+
+The README's branch table is rewritten on each exercise branch into a "you are
+on `exercise-N`" block, since the links to the other three handouts would
+otherwise 404.
 
 Tell people at the start: **your work is throwaway, switching branches
 discards it, that's intentional.** Otherwise someone will spend the break

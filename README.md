@@ -24,9 +24,11 @@ and talks to the same REST API you'll be modifying.
 
 ## The exercises
 
+<!-- EXERCISE-NAV-START -->
 Each exercise lives on its own branch that already contains everything that
-exercise needs. **You do not need to have finished the previous exercise to
-start the next one** — switching branches resets you to a known-good state.
+exercise needs — and nothing it doesn't. **You do not need to have finished the
+previous exercise to start the next one** — switching branches resets you to a
+known-good state.
 
 | # | Branch | Title | Handout |
 |---|--------|-------|---------|
@@ -38,6 +40,7 @@ start the next one** — switching branches resets you to a known-good state.
 ```bash
 git switch exercise-1     # start here
 ```
+<!-- EXERCISE-NAV-END -->
 
 Your work is throwaway. When an exercise ends, don't try to merge or preserve
 it — just `git switch` to the next branch. If you want to keep something,
@@ -58,9 +61,8 @@ src/main/java/com/bootcamp/taskflow/
   dto/           request/response shapes
   db/            InMemoryDatabase — seeded users and tasks, no real persistence
 src/main/resources/static/index.html   the web UI
-docs/exercises/  the four exercise handouts
-docs/tickets/    feature tickets used by the exercises
-docs/copilot-prompt-cheatsheet.md      prompt templates — keep this open all day
+docs/exercises/  the exercise handout(s) for this branch
+docs/tickets/    the feature ticket(s) this branch's exercise works from
 ```
 
 ## Calling the API with curl
