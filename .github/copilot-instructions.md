@@ -2,7 +2,7 @@
 
 ## Behavior
 
-Always respond concisely. Lead with the answer; add background only if asked.
+Always respond concisely. Lead with the answer
 
 ## Project context
 

@@ -29,9 +29,6 @@ change made in this repository — by a person or by an agent.
 - **Return `ErrorResponse`** for error bodies, never a bare string and never a
   raw exception message from an unexpected failure.
 - **Format with Google Java Format** — `./mvnw spotless:apply`.
-- **Don't reach for Jackson directly.** Spring Boot 4 moved it to
-  `tools.jackson`; let the auto-configured message converter handle
-  serialization. See `docs/notes-spring-boot-4-java-25.md`.
 
 ## Tests
 
