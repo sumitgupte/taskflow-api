@@ -104,10 +104,10 @@ set_readme_nav() {
       print ""
       print "Your handout: [docs/exercises/exercise-" n ".md](docs/exercises/exercise-" n ".md)"
       print ""
-      print "This branch contains only what Exercise " n " needs. The other exercises"
-      print "live on their own branches (`exercise-1` … `exercise-4`) and you do not"
-      print "need to have finished this one to switch to the next — each branch is a"
-      print "known-good starting point. Your work here is throwaway."
+      print "This branch contains only what Exercise " n " needs. The handouts and"
+      print "tickets for the others live on their own branches (`exercise-1` … `exercise-4`)."
+      print "You do not need to have finished this one to switch to the next; each branch"
+      print "is a known-good starting point."
       skip = 1
       next
     }
