@@ -38,7 +38,7 @@ git switch "$BASE"
 # the tool that generates the branches.
 strip_facilitator_only() {
   rm -rf docs/facilitator
-  rm -f scripts/rebuild-exercise-branches.sh
+  rm -f scripts/rebuild-exercise-branches.sh scripts/import-zips-to-git.sh
 }
 
 # Everything Exercise 1 teaches participants to write, and Exercise 2 must not
