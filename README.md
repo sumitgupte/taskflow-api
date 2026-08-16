@@ -63,6 +63,162 @@ docs/tickets/    feature tickets used by the exercises
 docs/copilot-prompt-cheatsheet.md      prompt templates — keep this open all day
 ```
 
+## Calling the API with curl
+
+Start the app first (`./mvnw spring-boot:run`). Every response below is real
+output from a fresh start — the seeded data is the same on every run, so you
+can paste these and compare.
+
+### Health — no auth
+
+```bash
+curl -s http://localhost:3000/health
+```
+```json
+{"status":"ok"}
+```
+
+### Log in and grab a token
+
+The password field is ignored (see `AuthController`), so email alone is enough.
+
+```bash
+curl -s -X POST http://localhost:3000/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"email":"alice@example.com"}'
+```
+```json
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MSIsImV4cCI6MTc4Njg5NDU4NDk4NH0.mw3pvSAsd5eIjkoT4IrxpW5etKzrRcxBgLG-v-5U6zM","user":{"id":"u1","name":"Alice Johnson","email":"alice@example.com"}}
+```
+
+Stash it in a shell variable — every `/tasks` call below needs it. The token is
+valid for 120 minutes; re-run this if you start getting 401s.
+
+```bash
+TOKEN=$(curl -s -X POST http://localhost:3000/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"email":"alice@example.com"}' | jq -r .token)
+```
+
+> No `jq`? Use `bob@example.com` to see the other user's tasks, and pull the
+> token out by hand:
+> ```bash
+> TOKEN=$(curl -s -X POST http://localhost:3000/auth/login \
+>   -H 'Content-Type: application/json' \
+>   -d '{"email":"alice@example.com"}' | sed 's/.*"token":"\([^"]*\)".*/\1/')
+> ```
+
+### List tasks
+
+Results are scoped to the token's owner and sorted by `dueDate`.
+
+```bash
+curl -s http://localhost:3000/tasks -H "Authorization: Bearer $TOKEN"
+```
+```json
+[{"id":"t2","ownerId":"u1","title":"Book dentist appointment","done":false,"dueDate":"2026-07-10","tags":["personal"]},
+ {"id":"t1","ownerId":"u1","title":"Write Q3 report","done":false,"dueDate":"2026-07-15","tags":["work"]}]
+```
+
+Filter by tag (exact match, case-sensitive — `Work` returns nothing):
+
+```bash
+curl -s "http://localhost:3000/tasks?tag=work" -H "Authorization: Bearer $TOKEN"
+```
+```json
+[{"id":"t1","ownerId":"u1","title":"Write Q3 report","done":false,"dueDate":"2026-07-15","tags":["work"]}]
+```
+
+Without a token you get a 401:
+
+```bash
+curl -s http://localhost:3000/tasks
+```
+```json
+{"error":"Missing or malformed Authorization header"}
+```
+
+### Get one task
+
+```bash
+curl -s http://localhost:3000/tasks/t1 -H "Authorization: Bearer $TOKEN"
+```
+```json
+{"id":"t1","ownerId":"u1","title":"Write Q3 report","done":false,"dueDate":"2026-07-15","tags":["work"]}
+```
+
+`t3` belongs to Bob, so as Alice it's a **404, not a 403** — the API doesn't
+confirm that someone else's task exists:
+
+```bash
+curl -s http://localhost:3000/tasks/t3 -H "Authorization: Bearer $TOKEN"
+```
+```json
+{"error":"Task not found"}
+```
+
+### Create a task — `201`
+
+```bash
+curl -s -X POST http://localhost:3000/tasks \
+  -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"title":"Prepare bootcamp demo","dueDate":"2026-09-01","tags":["work","urgent"]}'
+```
+```json
+{"id":"9eb29d05-a1b5-400d-a1b7-7daac3777a24","ownerId":"u1","title":"Prepare bootcamp demo","done":false,"dueDate":"2026-09-01","tags":["work","urgent"]}
+```
+
+`title` is the only validated field:
+
+```bash
+curl -s -X POST http://localhost:3000/tasks \
+  -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' -d '{"title":""}'
+```
+```json
+{"error":"title is required"}
+```
+
+### Update a task — partial `PATCH`
+
+Fields you omit are left untouched; only what you send is applied.
+
+```bash
+curl -s -X PATCH http://localhost:3000/tasks/t1 \
+  -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"done":true}'
+```
+```json
+{"id":"t1","ownerId":"u1","title":"Write Q3 report","done":true,"dueDate":"2026-07-15","tags":["work"]}
+```
+
+### Delete a task — `204`, empty body
+
+```bash
+curl -s -o /dev/null -w '%{http_code}\n' -X DELETE http://localhost:3000/tasks/t2 \
+  -H "Authorization: Bearer $TOKEN"
+```
+```
+204
+```
+
+### Endpoint summary
+
+| Method | Path | Auth | Success |
+|--------|------|------|---------|
+| `POST` | `/auth/login` | no | `200` + token |
+| `GET` | `/health` | no | `200` |
+| `GET` | `/tasks` | yes | `200`, optional `?tag=` |
+| `GET` | `/tasks/{id}` | yes | `200`, or `404` if missing *or* not yours |
+| `POST` | `/tasks` | yes | `201`, `400` if title blank |
+| `PATCH` | `/tasks/{id}` | yes | `200`, `404` if not yours |
+| `DELETE` | `/tasks/{id}` | yes | `204`, `404` if not yours |
+
+State resets on every restart, so `git checkout .` and a restart puts the
+seeded data back exactly as above.
+
 ## Useful commands
 
 ```bash
