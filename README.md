@@ -6,7 +6,8 @@ in one sitting and deliberately imperfect enough to be worth improving.
 
 ## Setup (do this before the session starts)
 
-Requirements: **JDK 25** and **Git**. Maven comes with the repo via `./mvnw`.
+Requirements: **JDK 25**, **Git**, and GitHub Copilot in either **VS Code** or
+**IntelliJ IDEA**. Maven comes with the repo via `./mvnw`.
 
 ```bash
 git clone https://github.com/sumitgupte/taskflow-api.git
@@ -21,6 +22,30 @@ The UI is a single static page served from `src/main/resources/static/index.html
 and talks to the same REST API you'll be modifying.
 
 > On Windows use `mvnw.cmd` instead of `./mvnw`.
+
+## VS Code and IntelliJ
+
+Every exercise works in both IDEs. The handouts use VS Code's names for things,
+so here's the mapping where they differ:
+
+| Handouts say | VS Code | IntelliJ IDEA |
+|---|---|---|
+| **Agent mode** | Chat view → mode dropdown → *Agent* | Copilot chat tool window → *Agent* |
+| **Model picker** | dropdown under the chat input | dropdown under the chat input |
+| **`.github/copilot-instructions.md`** | picked up automatically on every chat request | same — auto-discovered from the open project |
+| **`#file:path`** in a prompt | type `#file:` and pick the file | attach it via *Add context* / the file chip, or paste the path and let the agent open it |
+| **Auto-approve** | chat's *Continue* / auto-approve toggles | *Settings → GitHub Copilot → Chat* |
+| **Prompt files** (`/refine`) | `.github/prompts/*.prompt.md`, invoked as `/refine` | *Settings → Languages & Frameworks → GitHub Copilot → Customizations → Prompt Files* — see the caveat below |
+
+**The one real gap is prompt files (Exercise 4).** JetBrains supports them, but
+invocation isn't at parity with VS Code's `/name` slash commands, and some
+organisation plans have the preview features they depend on switched off. If
+`/refine` doesn't resolve, **open the file under `.github/prompts/` and paste
+its body into chat** — every Exercise 4 step gives the prompt in full for exactly
+this reason, and nothing in the exercise depends on the slash command working.
+
+Restart the IDE after switching branches if Copilot seems to be using the
+previous branch's instructions file.
 
 ## The exercises
 

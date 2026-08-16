@@ -35,8 +35,9 @@ overview. Blank slate, on purpose.
 
 ### 2. Agent — ask what the code base does
 
-Open Copilot Chat in **Agent mode** and ask, with no files attached and no
-setup:
+Open Copilot Chat in **Agent mode** — the mode dropdown in VS Code's chat view,
+or the *Agent* tab of IntelliJ's Copilot tool window — and ask, with no files
+attached and no setup:
 
 ```
 What does this code base do?
@@ -69,9 +70,10 @@ Always respond concisely.
 Make sure to elaborate extensively on every answer.
 ```
 
-> Save the file. In VS Code, `.github/copilot-instructions.md` is picked up
-> automatically for every chat request in the workspace — no attaching needed.
-> Start a **new chat** so you're not comparing against a primed conversation.
+> Save the file. In **both VS Code and IntelliJ**, `.github/copilot-instructions.md`
+> is picked up automatically for every chat request in the open project — you
+> don't attach it. Start a **new chat** so you're not comparing against a primed
+> conversation. If the old behavior persists, restart the IDE.
 
 ### 4. Agent — ask again
 

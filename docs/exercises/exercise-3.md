@@ -146,7 +146,9 @@ Discuss: which of your guidelines could become a real check, and how?
 ### 6. Agent — prompt again, with auto-approval on
 
 Same prompt, strong model, but enable **auto-approve** so the agent runs its own
-edits and terminal commands without stopping for you.
+edits and terminal commands without stopping for you — the auto-approve /
+*Continue* toggles in VS Code's chat, or *Settings → GitHub Copilot → Chat* in
+IntelliJ.
 
 ```
 Add reminders for tasks so users get notified before a task is due.

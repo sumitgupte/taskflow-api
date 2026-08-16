@@ -123,8 +123,10 @@ regardless of the latter.
 ## General habits, all phases
 
 - **Reference real files**, don't describe them from memory — use
-  `#file` / open-tabs context so Copilot works from the actual code,
-  not a guess at what it might contain.
+  `#file` / open-tabs context in VS Code, or *Add context* / the file
+  chip in IntelliJ, so Copilot works from the actual code and not a
+  guess at what it might contain. (`#file:` is VS Code syntax; in
+  IntelliJ attach the file or paste its path.)
 - **One phase at a time.** Asking for refine+plan+code in a single
   prompt collapses the checkpoints that make this workflow work.
 - **Treat plan review as non-optional**, even under deadline pressure —

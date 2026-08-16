@@ -27,6 +27,14 @@ before the next runs:
 This branch ships all three as reusable prompt files in `.github/prompts/`, so
 you can invoke them with `/refine`, `/plan`, `/implement` in Copilot Chat.
 
+> **IntelliJ:** prompt files live under *Settings → Languages & Frameworks →
+> GitHub Copilot → Customizations → Prompt Files*, and slash-command invocation
+> isn't at VS Code parity yet — on some organisation plans the preview features
+> they rely on are switched off entirely. If `/refine` doesn't resolve, open
+> `.github/prompts/refine.prompt.md` and paste its body into chat. Every step
+> below also gives the prompt in full under "…or by hand", so nothing here
+> depends on the slash command working.
+
 ---
 
 ## Steps
@@ -56,7 +64,8 @@ This time nobody types it straight into an agent. **Do not write code.** Prompt:
 /refine docs/tickets/reminders.md
 ```
 
-…or by hand:
+…or by hand (and in IntelliJ, if `/` doesn't resolve — `#file:` is VS Code
+syntax, so attach the file via *Add context* instead, or just paste the path):
 
 ```
 Read #file:docs/tickets/reminders.md. Identify gaps or ambiguities in the
@@ -91,7 +100,8 @@ made on purpose is fine; one you didn't notice you were making is the bug.
 /plan docs/tickets/reminders-spec.md
 ```
 
-…or by hand:
+…or by hand (and in IntelliJ, if `/` doesn't resolve — `#file:` is VS Code
+syntax, so attach the file via *Add context* instead, or just paste the path):
 
 ```
 Based on #file:docs/tickets/reminders-spec.md, create detailed implementation
@@ -119,7 +129,8 @@ ticket with different punctuation.
 /implement docs/tickets/reminders-plan.md
 ```
 
-…or by hand:
+…or by hand (and in IntelliJ, if `/` doesn't resolve — `#file:` is VS Code
+syntax, so attach the file via *Add context* instead, or just paste the path):
 
 ```
 Implement the plan in #file:docs/tickets/reminders-plan.md. Follow all

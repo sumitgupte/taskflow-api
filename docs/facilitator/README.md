@@ -40,6 +40,9 @@ lesson is "write a good instructions file", the arc didn't land.
 - [ ] Everyone has Copilot licensed with **agent mode** and access to at least
       one premium model (Claude Sonnet 4.5 or equivalent). Ex 2 and 3 compare
       two models; without a second model those steps collapse.
+- [ ] **Find out who's on IntelliJ vs VS Code before the day**, and check the
+      prompt-file caveat below if anyone is on IntelliJ. Both IDEs work; the
+      README has a mapping table participants can refer to.
 - [ ] Everyone has **JDK 25**. `java -version` must say 25. Spring Boot 4.1
       won't build on 17.
 - [ ] Everyone ran `./mvnw test` **on their own machine, before the day**.
