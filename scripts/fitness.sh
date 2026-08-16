@@ -41,10 +41,3 @@ printf '\033[31m%d gate(s) failed:\033[0m\n' "${#failed[@]}"
 printf '  - %s\n' "${failed[@]}"
 printf '\nFormatting failures are auto-fixable: %s spotless:apply\n' "$MVNW"
 exit 1
-
-# Not covered by any gate here, and worth discussing in Exercise 3:
-#   - "Don't write trivial comments"
-#   - "Scope every task read by the authenticated userId"
-#   - "Update the CHANGELOG for user-visible changes"
-# These are real guidelines with no automated enforcement, which is precisely
-# why they are the ones that keep getting violated. What would it take?

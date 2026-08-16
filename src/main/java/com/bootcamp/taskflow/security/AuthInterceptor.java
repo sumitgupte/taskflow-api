@@ -9,10 +9,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
  * Mirrors the Node version's requireAuth middleware: reads a Bearer token, verifies it, and stashes
  * the userId on the request for downstream controllers to read via request.getAttribute("userId").
  *
- * <p>Note: this writes its error body by hand rather than going through Jackson directly, since
- * Spring Boot 4 moved Jackson's core classes to a new "tools.jackson" package (see
- * docs/notes-spring-boot-4-java-25.md) and this keeps the interceptor decoupled from that either
- * way.
+ * <p>Note: this writes its error body by hand rather than going through Jackson directly, which
+ * keeps the interceptor decoupled from whichever JSON mapper the rest of the app uses.
  */
 public class AuthInterceptor implements HandlerInterceptor {
 

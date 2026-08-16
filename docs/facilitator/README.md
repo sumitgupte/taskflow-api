@@ -67,13 +67,19 @@ deliberate: someone who reads the Exercise 4 handout while sitting in Exercise 2
 already knows the punchline, and the day's arc depends on Exercise 2 failing
 before Exercise 3 explains it.
 
-| Branch | Handout | Tickets | Cheat-sheet |
-|--------|---------|---------|-------------|
-| `exercise-1` | `exercise-1.md` | *none — no ticket in this exercise* | ✗ |
-| `exercise-2` | `exercise-2.md` | `reminders.md` | ✗ |
-| `exercise-3` | `exercise-3.md` | `reminders.md` | ✗ |
-| `exercise-4` | `exercise-4.md` | `reminders.md`, `rate-limiting.md`, `task-listing-performance.md` | ✓ |
-| `main` | all four | all four | ✓ |
+| Branch | Handout | Tickets | Cheat-sheet | `fitness.sh` |
+|--------|---------|---------|-------------|--------------|
+| `exercise-1` | `exercise-1.md` | *none — no ticket in this exercise* | ✗ | ✗ |
+| `exercise-2` | `exercise-2.md` | `reminders.md` | ✗ | ✗ |
+| `exercise-3` | `exercise-3.md` | `reminders.md` | ✗ | ✓ |
+| `exercise-4` | `exercise-4.md` | `reminders.md`, `rate-limiting.md`, `task-listing-performance.md` | ✓ | ✓ |
+| `main` | all four | all four | ✓ | ✓ |
+
+`scripts/fitness.sh` is scoped the same way: Exercise 3 step 5 introduces it as
+the payoff of having just written coding guidelines, so shipping it on
+`exercise-1` and `exercise-2` would pre-answer that step's "what would actually
+enforce this?" discussion. Those branches run `./mvnw test` and nothing else,
+and their README's command list is trimmed to match.
 
 `docs/copilot-prompt-cheatsheet.md` is scoped to `exercise-4` for the same
 reason — it lays out refine → plan → implement in full, which is Exercise 4's
@@ -211,10 +217,14 @@ Have tables run `git diff exercise-2 -- src/` here rather than eyeballing it.
 The Ex2-vs-Ex3 diff on the same feature is far more convincing than two
 descriptions of two different features would have been.
 
-**Fitness functions.** `scripts/fitness.sh` runs tests + format check +
-compile. The discussion that matters is the comment block at the bottom of the
-script — the three guidelines with *no* automated gate, which are the three
-that keep getting violated. Good answers from tables:
+**Fitness functions.** `scripts/fitness.sh` runs tests + format check + compile,
+and appears on `exercise-3` for the first time — Exercises 1 and 2 don't have it,
+so step 5 is genuinely the moment participants meet the idea.
+
+The discussion that matters is what the script *doesn't* gate. Have them read
+their own guidelines list against it and find the rules with no automated check
+behind them — typically these three, which are also the three that keep getting
+violated. Good answers from tables:
 
 - Scoping-by-userId → an ArchUnit rule, or a test that logs in as Bob and
   asserts every endpoint returns nothing of Alice's

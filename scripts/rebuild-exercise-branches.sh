@@ -54,20 +54,16 @@ strip_instructions() {
 strip_exercise_3() {
   rm -rf .github/prompts
   rm -f docs/coding-guidelines.md
-  cat > .github/copilot-instructions.md <<'INSTRUCTIONS'
-# Copilot instructions
 
-## Behavior
-
-Always respond concisely. Lead with the answer; add background only if asked.
-
-## Project context
-
-See [PROJECT_OVERVIEW.md](../PROJECT_OVERVIEW.md) for the architecture, request
-flow, conventions and known limitations of this project. Consult it before
-answering questions about how the system fits together, and before proposing a
-change that spans more than one class.
-INSTRUCTIONS
+  # Drop the "Coding guidelines" section from main's instructions rather than
+  # rewriting the file, so edits to the behavior and project-context sections on
+  # main propagate here instead of silently drifting.
+  local tmp
+  tmp="$(mktemp)"
+  awk '/^## Coding guidelines/ { exit } { print }' .github/copilot-instructions.md > "$tmp"
+  # awk leaves the blank line that separated the sections; trim trailing blanks.
+  printf '%s\n' "$(cat "$tmp")" > .github/copilot-instructions.md
+  rm -f "$tmp"
 }
 
 # Keep only this exercise's handout. Reading ahead spoils the arc: the whole
@@ -90,6 +86,29 @@ keep_only_tickets() {
     base="$(basename "$f")"
     [[ " ${keep[*]} " == *" $base "* ]] || rm -f "$f"
   done
+}
+
+# Fitness functions are introduced in Exercise 3 step 5, as the payoff of having
+# just written coding guidelines. Shipping the script earlier pre-answers the
+# "what would actually enforce this?" discussion that step exists to have —
+# Exercises 1 and 2 only ever run ./mvnw test.
+strip_fitness() {
+  rm -f scripts/fitness.sh
+  local tmp
+  tmp="$(mktemp)"
+  awk '
+    /<!-- COMMANDS-START -->/ { skip = 1 }
+    /<!-- COMMANDS-END -->/   { skip = 0
+      print "```bash"
+      print "./mvnw test                 # run the test suite"
+      print "./mvnw spring-boot:run      # start the API on :3000"
+      print "./mvnw spotless:apply       # auto-format (Google Java Format)"
+      print "```"
+      next
+    }
+    !skip { print }
+  ' README.md > "$tmp"
+  mv "$tmp" README.md
 }
 
 # The README's branch table links to all four handouts, which don't exist on a
@@ -132,6 +151,7 @@ build_branch() {
 
 exercise_1() {
   strip_instructions
+  strip_fitness
   keep_only_handout 1
   keep_only_tickets
   rm -f docs/copilot-prompt-cheatsheet.md
@@ -140,6 +160,7 @@ exercise_1() {
 
 exercise_2() {
   strip_instructions
+  strip_fitness
   keep_only_handout 2
   keep_only_tickets reminders.md
   rm -f docs/copilot-prompt-cheatsheet.md

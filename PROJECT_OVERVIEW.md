@@ -77,8 +77,9 @@ unless a ticket asks you to:
 - **No input validation** on title length or `dueDate` format.
 - **Tag filtering is case-sensitive exact match.**
 - **No email, push, or scheduling infrastructure exists.**
-- **JWT is hand-rolled.** Fine for a lab; see
-  `docs/notes-spring-boot-4-java-25.md` for why a library wasn't used.
+- **JWT is hand-rolled** in `security/JwtService.java` — a minimal HS256
+  encode/verify on the JDK's own crypto, with no library. Fine for a lab, not a
+  pattern to copy.
 
 ## Endpoints
 

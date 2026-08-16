@@ -227,17 +227,19 @@ seeded data back exactly as above.
 
 ## Useful commands
 
+<!-- COMMANDS-START -->
 ```bash
 ./mvnw test                 # run the test suite
 ./mvnw spring-boot:run      # start the API on :3000
 ./mvnw spotless:apply       # auto-format (Google Java Format)
-./scripts/fitness.sh        # run every quality gate at once (see Exercise 3)
+./scripts/fitness.sh        # run every quality gate at once
 ```
+<!-- COMMANDS-END -->
 
 ## Notes
 
 - There is no database. `InMemoryDatabase` is a seeded `ArrayList` and state
   resets on every restart. This is on purpose — zero setup, zero Docker.
-- JWT signing is hand-rolled in `security/JwtService.java`. Fine for a lab,
-  not a pattern to copy. See [docs/notes-spring-boot-4-java-25.md](docs/notes-spring-boot-4-java-25.md)
-  for why, plus the Spring Boot 4 / Jackson 3 gotchas worth knowing.
+- JWT signing is hand-rolled in `security/JwtService.java` — a minimal HS256
+  encode/verify with no dependency beyond the JDK. Fine for a lab, not a
+  pattern to copy.
