@@ -26,9 +26,7 @@ and talks to the same REST API you'll be modifying.
 
 <!-- EXERCISE-NAV-START -->
 Each exercise lives on its own branch that already contains everything that
-exercise needs — and nothing it doesn't. **You do not need to have finished the
-previous exercise to start the next one** — switching branches resets you to a
-known-good state.
+exercise needs — and nothing it doesn't.
 
 | # | Branch | Title | Handout |
 |---|--------|-------|---------|
@@ -42,13 +40,19 @@ git switch exercise-1     # start here
 ```
 <!-- EXERCISE-NAV-END -->
 
-Your work is throwaway. When an exercise ends, don't try to merge or preserve
-it — just `git switch` to the next branch. If you want to keep something,
-commit it on a branch of your own first:
+**Exercises 2, 3 and 4 all build the same feature** — task reminders — by three
+different processes: vibe coding, ad-hoc with instructions, and a
+refine → plan → implement cycle. Holding the feature constant is what makes the
+comparison mean anything, so **commit your work at the end of each exercise.**
+You'll diff the three against each other in Exercise 4.
 
 ```bash
-git switch -c my-exercise-2 && git add -A && git commit -m "my attempt"
+git add -A && git commit -m "ex2: my attempt"
 ```
+
+Each branch starts from the same clean baseline rather than from the previous
+exercise's code, so you can begin any exercise without having finished the last
+one. Committing on the branch keeps your version available to compare against.
 
 ## What's in here
 

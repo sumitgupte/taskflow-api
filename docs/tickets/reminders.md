@@ -1,6 +1,6 @@
 # Ticket: Add reminders for tasks
 
-**Used by:** Exercise 4, steps 2–4 (refine → plan → implement)
+**Used by:** Exercises 2, 3 and 4 — the same ticket, built three different ways.
 
 ## As filed by the product owner
 
@@ -9,28 +9,23 @@
 > Users keep missing deadlines. Can we add reminders so they get notified
 > before a task is due? Should work for all tasks. Let's ship this soon.
 
-That's the whole ticket. This is realistic — most tickets arrive
-under-specified, and closing the gaps before generating code is the job.
+That's it. That's the whole ticket.
 
-## Constraints that exist whether the ticket mentions them or not
+This is realistic — most tickets arrive under-specified, and closing the gaps
+before generating code is the job. Everything that goes wrong in Exercise 2
+traces back to something this ticket doesn't say.
 
-You'll find these by reading the code, which is the point. Listed here only so
-a stuck pair can get unstuck:
+## What it doesn't tell you
 
-- `service/NotificationService.java` is an empty placeholder. There is no
-  email transport, no push infrastructure, and no scheduler in this project.
-- `db/InMemoryDatabase.java` holds everything in an `ArrayList`. State does not
-  survive a restart.
-- `dueDate` on `model/Task.java` is a plain `String`, not a date type, and it is
-  nullable.
-- Every task-scoped read goes through `security/AuthInterceptor.java`, which
-  puts the authenticated `userId` on the request.
+Not a checklist to work through now — just proof that the gaps are real, and
+worth re-reading after you've seen what a model does with the ticket as filed:
 
-## Definition of done for the exercise
+- What *is* a reminder here? In-app, email, push?
+- How long before the due date does it fire? Fixed, or per task?
+- What happens to tasks that have no due date?
+- What happens to tasks already marked done?
+- Does it fire once, or keep reminding until the task is done?
+- Who can see or manage another user's reminders?
 
-Not a shipped reminder system — you won't get there in 45 minutes and you
-aren't meant to. Done is:
-
-1. `docs/tickets/reminders-spec.md` — 5–10 bullets, every ambiguity decided
-2. `docs/tickets/reminders-plan.md` — numbered, each step independently verifiable
-3. One or two plan steps actually implemented, with `./scripts/fitness.sh` green
+Every implementation answers all six of these. The only question is whether a
+human decided the answers or a model guessed them.

@@ -9,10 +9,10 @@
 
 ## Why this exercise exists
 
-Exercises 2 and 3 both failed the same way: the ticket was one line, so the
-model guessed, and every run guessed differently. Better models narrowed the
-variance. Instructions constrained the style. Neither one supplied the missing
-requirements, because nobody had them.
+**Third time building the same feature.** Exercises 2 and 3 both failed the same
+way: the ticket was one line, so the model guessed, and every run guessed
+differently. Better models narrowed the variance. Instructions constrained the
+style. Neither supplied the missing requirements, because nobody had them.
 
 This is the exercise where you stop trying to fix that with a better prompt and
 fix it with a better *process*. Three prompts, in order, each one reviewed
@@ -42,14 +42,15 @@ coding guidelines, changelog, fitness script — plus the prompt files.
 
 ### 2. Refine
 
-Read the ticket: [docs/tickets/reminders.md](../tickets/reminders.md).
+The same ticket you've been handed twice already:
+[docs/tickets/reminders.md](../tickets/reminders.md).
 
 > **Add reminders for tasks**
 >
 > Users keep missing deadlines. Can we add reminders so they get notified
 > before a task is due? Should work for all tasks. Let's ship this soon.
 
-Under-specified, like every real ticket. **Do not write code.** Prompt:
+This time nobody types it straight into an agent. **Do not write code.** Prompt:
 
 ```
 /refine docs/tickets/reminders.md
@@ -138,6 +139,23 @@ against your vibes:
 You will probably not finish the whole feature. **That's expected and fine** —
 the exercise is the cycle, not the reminder system.
 
+Now put all three attempts side by side. Same ticket, same models, three
+processes:
+
+```bash
+git diff exercise-2 -- src/    # vibe coded, no instructions
+git diff exercise-3 -- src/    # instructions and guidelines, still one-line prompt
+```
+
+Score each on the six questions from Step 2 — what a reminder is, when it fires,
+no-`dueDate` tasks, already-`done` tasks, one-shot vs repeating, cross-user
+visibility. **Which questions did each version answer, and did it answer them on
+purpose?**
+
+The Exercise 2 code probably answers all six too. The difference isn't how many
+got answered — it's that yours are written down in a spec somebody reviewed, so
+you can tell whether they're right.
+
 ### 5. New feature — run the cycle again
 
 Pick a second ticket and run all three stages again, faster now that you know
@@ -180,8 +198,8 @@ drifts off the plan halfway through. Things that help:
 
 ## Debrief questions
 
-1. Compare your reminders result to Exercise 2's audit log. How much of the
-   difference is the process, and how much is that you spent longer?
+1. Same ticket, three processes. How much of the difference between them is the
+   process, and how much is just that you spent longer on this one?
 2. Which of the three stages was hardest to not skip under time pressure?
 3. Refine took 15 minutes and produced no code. Sell that to a sceptical
    colleague in two sentences.

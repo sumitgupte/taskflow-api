@@ -1,9 +1,5 @@
 # Facilitator guide
 
-**This directory exists only on `main`.** It is deleted from all four
-`exercise-*` branches, so participants who clone and `git switch exercise-1`
-never see it. Keep it that way — half of it is answer key.
-
 ---
 
 ## Run of show
@@ -27,13 +23,14 @@ in Exercise 4.
 
 ## The arc
 
-Each exercise is engineered to fail in a way the next one fixes. Say this out
-loud at the debriefs or the sequence reads as four disconnected labs:
+Each exercise is engineered to fail in a way the next one fixes, and Exercises
+2–4 build the *same feature* so the failures are directly comparable. Say this
+out loud at the debriefs or the sequence reads as four disconnected labs:
 
 1. **Ex 1** — instructions change what Copilot *knows*, not just how it talks.
 2. **Ex 2** — with no instructions and a one-line ticket, output is a lottery. Better model = narrower lottery, still a lottery.
-3. **Ex 3** — instructions + fitness functions raise the floor. The ceiling doesn't move, because the ticket is *still* one line.
-4. **Ex 4** — the missing ingredient was never the prompt or the model. It was that nobody had decided what to build.
+3. **Ex 3** — same ticket, now with instructions + fitness functions. The floor rises. The ceiling doesn't, because the ticket is *still* one line.
+4. **Ex 4** — same ticket again, refined first. The missing ingredient was never the prompt or the model. It was that nobody had decided what to build.
 
 The pivot at the end of Ex 3 is the whole day. If people leave thinking the
 lesson is "write a good instructions file", the arc didn't land.
@@ -73,8 +70,8 @@ before Exercise 3 explains it.
 | Branch | Handout | Tickets | Cheat-sheet |
 |--------|---------|---------|-------------|
 | `exercise-1` | `exercise-1.md` | *none — no ticket in this exercise* | ✗ |
-| `exercise-2` | `exercise-2.md` | `audit-log.md` | ✗ |
-| `exercise-3` | `exercise-3.md` | `audit-log.md` | ✗ |
+| `exercise-2` | `exercise-2.md` | `reminders.md` | ✗ |
+| `exercise-3` | `exercise-3.md` | `reminders.md` | ✗ |
 | `exercise-4` | `exercise-4.md` | `reminders.md`, `rate-limiting.md`, `task-listing-performance.md` | ✓ |
 | `main` | all four | all four | ✓ |
 
@@ -86,12 +83,33 @@ The README's branch table is rewritten on each exercise branch into a "you are
 on `exercise-N`" block, since the links to the other three handouts would
 otherwise 404.
 
-Tell people at the start: **your work is throwaway, switching branches
-discards it, that's intentional.** Otherwise someone will spend the break
-trying to rebase their audit log.
+## One feature, three processes
 
-If a participant's tree is wrecked mid-exercise:
-`git checkout . && git clean -fd`
+**Exercises 2, 3 and 4 all build the reminders feature.** Same ticket, same
+models, three processes. This is the spine of the day and the reason the
+comparison is worth anything — vary one input at a time and hold the feature
+constant.
+
+Say this explicitly at the start of Exercise 2, or people experience it as
+repetition rather than as an experiment. The line that works: *"you're going to
+build this three times, and the third one will be the only one you'd merge."*
+
+**Push people to commit at the end of each exercise.** Exercise 4 step 4 has
+them run `git diff exercise-2 -- src/` and `git diff exercise-3 -- src/` to put
+all three side by side. That comparison is the payoff of the whole day, and it
+doesn't work if nobody committed. Remind them at each debrief:
+
+```bash
+git add -A && git commit -m "ex2: gpt-4.1, no instructions"
+```
+
+Branches still start from a clean baseline rather than from the previous
+exercise's code, so a participant who falls behind or wrecks their tree can
+switch and be caught up instantly:
+
+```bash
+git checkout . && git clean -fd     # reset within an exercise
+```
 
 ---
 
@@ -141,17 +159,31 @@ confidently. Instructions are trusted input, not verified input.
 5. `dueDate` is a nullable `String`; sorting coerces `null` to `""`.
 6. `AuthController` never checks the password.
 
-**What the audit-log runs typically produce**, in rough order of frequency:
+**What the reminders runs typically produce**, in rough order of frequency:
 
-- A `System.out.println` or SLF4J logger call inside `TaskService`. No storage,
-  no read path. Technically satisfies "audit log".
-- An `AuditLog` model + list in `InMemoryDatabase` + a `GET /audit` endpoint —
-  **frequently unscoped by user**, so Alice reads Bob's entries. Steer at least
-  one table to find this; it's the highest-value moment in the exercise.
-- Auditing only `addTask`, silently missing `updateTask` and `deleteTask`.
-- Occasionally: a `@Transactional`/JPA-flavoured design, hallucinating a
-  persistence layer that doesn't exist.
+- A `boolean reminderSent` / `reminderAt` field bolted onto `Task`, with nothing
+  that ever actually fires. The feature "exists" and does nothing.
+- `@Scheduled` + `@EnableScheduling` added out of nowhere, sometimes with a
+  fabricated `spring-boot-starter-quartz` dependency. This repo has no
+  scheduler — watch for a model inventing one and never mentioning that it did.
+- An email or push sender hallucinated behind `NotificationService`, complete
+  with an SMTP config block for a server that doesn't exist. The class name
+  alone is enough to trigger this.
+- **NPE on the seeded null `dueDate` values.** Very common, and it's the cheapest
+  possible demonstration that the model didn't read `InMemoryDatabase`.
+- Reminders fired for `t3`, which is already `done`. Nobody decided that should
+  or shouldn't happen, so it just falls out of the implementation.
+- A `GET /reminders` endpoint **unscoped by user**, so Alice reads Bob's. Steer
+  at least one table to find this; it's the highest-value moment in the exercise
+  and the one that maps most directly onto a real production incident.
+- A hardcoded lead time (24h is the favourite) with no configuration and no
+  mention that a choice was made.
 - Rarely, unprompted tests. When the TDD prompt lands in step 6, tests appear.
+
+The six ambiguities from the ticket are the scoring rubric — what a reminder is,
+when it fires, no-`dueDate`, already-`done`, one-shot vs repeating, and who can
+see them. **Every implementation answers all six.** The point to land: the model
+didn't skip those decisions, it made them silently and differently every run.
 
 **The step 5 point (same prompt, same model, different result)** is easy to
 rush past. Make people actually diff it. "It worked when I tried it" dies here.
@@ -168,8 +200,16 @@ instructions file does**, for this kind of vague ticket. Let that land honestly
 rather than steering to "instructions are great" — it sets up Ex 4.
 
 What instructions *do* reliably improve: adherence to existing patterns
-(constructor injection, `ErrorResponse`), and not hallucinating persistence.
-What they don't fix: the feature still isn't specified.
+(constructor injection, `ErrorResponse`), and — because `PROJECT_OVERVIEW.md`
+says so in as many words — a sharp drop in invented schedulers and email
+transports. That's the single clearest measurable win, so point at it.
+
+What they don't fix: the feature still isn't specified. The six ambiguities are
+still being answered silently, just in better-formatted code.
+
+Have tables run `git diff exercise-2 -- src/` here rather than eyeballing it.
+The Ex2-vs-Ex3 diff on the same feature is far more convincing than two
+descriptions of two different features would have been.
 
 **Fitness functions.** `scripts/fitness.sh` runs tests + format check +
 compile. The discussion that matters is the comment block at the bottom of the

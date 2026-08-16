@@ -141,7 +141,7 @@ exercise_1() {
 exercise_2() {
   strip_instructions
   keep_only_handout 2
-  keep_only_tickets audit-log.md
+  keep_only_tickets reminders.md
   rm -f docs/copilot-prompt-cheatsheet.md
   set_readme_nav 2 "Vibe code a feature without instructions"
 }
@@ -149,7 +149,7 @@ exercise_2() {
 exercise_3() {
   strip_exercise_3
   keep_only_handout 3
-  keep_only_tickets audit-log.md
+  keep_only_tickets reminders.md
   rm -f docs/copilot-prompt-cheatsheet.md
   set_readme_nav 3 "Implementing a feature ad-hoc with instructions"
 }
