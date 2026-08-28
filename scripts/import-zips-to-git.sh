@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 #
 # Rebuild this repo, all branches, from per-branch ZIPs downloaded from GitHub —
-# then optionally push everything to a new remote such as an internal GitLab.
+# then optionally push the exercise branches to a new remote such as an internal
+# GitLab.
 #
 # For the case where you can DOWNLOAD from GitHub but not clone or reach it from
 # the machine that needs the material. GitHub's "Download ZIP" only ever gives
 # you one branch, so you download all five and this stitches them back together.
+#
+# Every branch is committed LOCALLY. Only the exercise branches are pushed —
+# `main` stays on your machine, so anything you keep on it (notes, local
+# tweaks, material you don't want on the org's server) never leaves. Override
+# with PUSH_BRANCHES if you want a different set:
+#
+#   PUSH_BRANCHES="main exercise-1" ./import-zips-to-git.sh ...
 #
 # History is NOT preserved: each branch becomes a single fresh commit. That is
 # fine here — the exercise branches are generated snapshots, not a story.
@@ -23,6 +31,10 @@ set -euo pipefail
 
 BRANCHES=(main exercise-1 exercise-2 exercise-3 exercise-4)
 
+# What actually gets pushed. Everything above is still committed locally.
+# shellcheck disable=SC2206
+PUSH_BRANCHES=(${PUSH_BRANCHES:-exercise-1 exercise-2 exercise-3 exercise-4})
+
 ZIP_DIR="${1:?usage: $0 <zip-dir> <target-dir> [remote-url]}"
 TARGET="${2:?usage: $0 <zip-dir> <target-dir> [remote-url]}"
 REMOTE="${3:-}"
@@ -30,6 +42,12 @@ REMOTE="${3:-}"
 command -v unzip >/dev/null || { echo "unzip is required" >&2; exit 1; }
 
 ZIP_DIR="$(cd "$ZIP_DIR" && pwd)"
+
+for p in "${PUSH_BRANCHES[@]}"; do
+  found=no
+  for b in "${BRANCHES[@]}"; do [[ "$b" == "$p" ]] && found=yes; done
+  [[ "$found" == yes ]] || { echo "PUSH_BRANCHES names '$p', which is not a branch this script builds." >&2; exit 1; }
+done
 
 # Fail before doing any work if a download is missing, rather than producing a
 # repo that is quietly short a branch.
@@ -94,18 +112,28 @@ git -C "$TARGET" checkout -q main
 echo
 echo "Built $TARGET with branches: $(git -C "$TARGET" branch --format='%(refname:short)' | tr '\n' ' ')"
 
+local_only=()
+for b in "${BRANCHES[@]}"; do
+  pushed=no
+  for p in "${PUSH_BRANCHES[@]}"; do [[ "$b" == "$p" ]] && pushed=yes; done
+  [[ "$pushed" == no ]] && local_only+=("$b")
+done
+[[ ${#local_only[@]} -gt 0 ]] && echo "Staying local only: ${local_only[*]}"
+
 if [[ -n "$REMOTE" ]]; then
-  echo "── pushing to $REMOTE"
+  echo "── pushing to $REMOTE: ${PUSH_BRANCHES[*]}"
   git -C "$TARGET" remote add origin "$REMOTE"
-  git -C "$TARGET" push -u origin --all
-  echo "Done."
+  git -C "$TARGET" push -u origin "${PUSH_BRANCHES[@]}"
+  echo "Done. Set the default branch on the remote to ${PUSH_BRANCHES[0]} if it isn't already."
 else
   cat <<EOF
 
-Next, point it at your GitLab project and push every branch:
+Next, point it at your GitLab project and push the exercise branches:
 
   cd "$TARGET"
   git remote add origin <your-gitlab-url>
-  git push -u origin --all
+  git push -u origin ${PUSH_BRANCHES[*]}
+
+${local_only[*]:+Not pushed, by design: ${local_only[*]}}
 EOF
 fi
