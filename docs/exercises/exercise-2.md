@@ -40,9 +40,9 @@ from the raw code alone.
 git switch exercise-2
 ```
 
-### 2. Agent — GPT-4.1
+### 2. Agent — GPT-5 mini
 
-Set the model picker to **GPT-4.1**. In Agent mode, prompt exactly:
+Set the model picker to **GPT-5 mini**. In Agent mode, prompt exactly:
 
 ```
 Add reminders for tasks so users get notified before a task is due.
@@ -61,7 +61,7 @@ Then check whether the app still works:
 **Save this attempt** — you'll want it side by side with Exercises 3 and 4:
 
 ```bash
-git add -A && git commit -m "ex2: gpt-4.1, no instructions"
+git add -A && git commit -m "ex2: gpt-5-mini, no instructions"
 ```
 
 ### 3. Code review — go over what was generated
@@ -94,7 +94,7 @@ git switch exercise-2 && git checkout . && git clean -fd
 
 ### 4. Agent — try a premium model
 
-Switch to **Claude Sonnet 4.5** (or the strongest model available to you). Same
+Switch to **Claude Opus 5** (or the strongest model available to you). Same
 prompt, word for word. Run the same review checklist.
 
 Note the differences *specifically*, not just "better": did it search the

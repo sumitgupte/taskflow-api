@@ -75,7 +75,7 @@ lesson is "write a good instructions file", the arc didn't land.
 ## Before the session
 
 - [ ] Everyone has Copilot licensed with **agent mode** and access to at least
-      one premium model (Claude Sonnet 4.5 or equivalent). Ex 2 and 3 compare
+      one premium model (Claude Opus 5 or equivalent). Ex 2 and 3 compare
       two models; without a second model those steps collapse.
 - [ ] **Find out who's on IntelliJ vs VS Code before the day**, and check the
       prompt-file caveat below if anyone is on IntelliJ. Both IDEs work; the
@@ -146,7 +146,7 @@ all three side by side. That comparison is the payoff of the whole day, and it
 doesn't work if nobody committed. Remind them at each debrief:
 
 ```bash
-git add -A && git commit -m "ex2: gpt-4.1, no instructions"
+git add -A && git commit -m "ex2: gpt-5-mini, no instructions"
 ```
 
 Branches still start from a clean baseline rather than from the previous
@@ -226,6 +226,20 @@ confidently. Instructions are trusted input, not verified input.
   mention that a choice was made.
 - Rarely, unprompted tests. When the TDD prompt lands in step 6, tests appear.
 
+**A note on the model pairing.** These predictions were originally calibrated
+against GPT-4.1 vs Claude Sonnet 4.5. With **GPT-5 mini** as the weak end, the
+"weak" runs will fail less spectacularly than the list above suggests — expect
+fewer outright NPEs and more plausible-looking code that still answers the six
+ambiguities silently. That is not a problem for the exercise; if anything it is
+a better demonstration, because "it compiles and looks reasonable" is the actual
+failure mode people meet at work. Steer the review toward *what was decided*
+rather than *what broke*.
+
+Conversely, **Claude Opus 5** at the strong end will sometimes ask a clarifying
+question or refuse to invent a scheduler unprompted. When that happens, name it:
+the model did the Refine stage on its own, badly and partially, because nobody
+else had. That is a gift-wrapped setup for Exercise 4 — use it.
+
 The six ambiguities from the ticket are the scoring rubric — what a reminder is,
 when it fires, no-`dueDate`, already-`done`, one-shot vs repeating, and who can
 see them. **Every implementation answers all six.** The point to land: the model
@@ -246,7 +260,10 @@ in *naming a practice the model already knows*, not in describing it.
 
 **Expected ranking of the four runs** (Ex2 weak → Ex2 strong → Ex3 weak →
 Ex3 strong). The usual finding: **model choice moves quality more than the
-instructions file does**, for this kind of vague ticket. Let that land honestly
+instructions file does**, for this kind of vague ticket. The GPT-5 mini / Opus 5
+spread is wide, so expect this to be even more pronounced than it was with the
+older pairing — which makes the Exercise 4 pivot land harder, not softer, since
+the point is that neither axis supplied the missing requirements. Let that land honestly
 rather than steering to "instructions are great" — it sets up Ex 4.
 
 What instructions *do* reliably improve: adherence to existing patterns

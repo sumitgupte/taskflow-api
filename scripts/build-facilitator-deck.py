@@ -394,12 +394,12 @@ Do not list the six ambiguities yet. Let them discover the failures first — th
 
 bullets_slide(
     "Three runs, same feature — plus one you'll watch",
-    [("Run 1 — GPT-4.1", "The lazy path. Don't help it, don't clarify, don't correct mid-flight."),
+    [("Run 1 — GPT-5 mini", "The lazy path. Don't help it, don't clarify, don't correct mid-flight."),
      ("Run 2 — a premium model", "Same prompt, word for word. Note the differences specifically."),
      ("On the projector — the same prompt again", "Your facilitator runs it. Is the result the same?"),
      ("Run 3 — \"...using TDD\"", "Three extra words. Compare to all of the above.")],
     eyebrow="Exercise 2 · steps",
-    kicker="Commit after every run:  git add -A && git commit -m \"ex2: gpt-4.1, no instructions\"",
+    kicker="Commit after every run:  git add -A && git commit -m \"ex2: gpt-5-mini, no instructions\"",
     notes="""PUSH PEOPLE TO COMMIT. Exercise 4 step 4 has them diff all three exercises against each other, and that payoff does not work if nobody committed.
 
 Reset between runs:  git switch exercise-2 && git checkout . && git clean -fd
@@ -417,6 +417,10 @@ bullets_slide(
     eyebrow="Exercise 2 · answer key",
     kicker="Steer at least one table to the unscoped endpoint — it maps straight onto a real incident.",
     notes="""Roughly in order of frequency. The class name NotificationService alone is enough to trigger the invented email transport.
+
+CALIBRATION: this list was written against GPT-4.1 vs Sonnet 4.5. With GPT-5 mini at the weak end, expect fewer outright NPEs and more plausible-looking code that still answers the six ambiguities silently. That is a better demonstration, not a worse one — "it compiles and looks reasonable" is the failure mode people actually meet at work. Steer the review toward WHAT WAS DECIDED rather than what broke.
+
+With Opus 5 at the strong end, it may ask a clarifying question or refuse to invent a scheduler. Name it when it happens: the model did the Refine stage on its own, partially, because nobody else had. Perfect setup for Exercise 4.
 
 The unscoped read endpoint is the highest-value moment in the exercise. If no table finds it, ask directly: "can Alice see Bob's reminders?"
 

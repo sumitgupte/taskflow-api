@@ -42,9 +42,9 @@ git switch exercise-3
 Read `.github/copilot-instructions.md` before you start, so you know what
 Copilot is being told that it wasn't told yesterday.
 
-### 2. Agent — GPT-4.1
+### 2. Agent — GPT-5 mini
 
-Model picker to **GPT-4.1**, Agent mode, the same prompt as Exercise 2:
+Model picker to **GPT-5 mini**, Agent mode, the same prompt as Exercise 2:
 
 ```
 Add reminders for tasks so users get notified before a task is due.
@@ -77,7 +77,7 @@ Reset: `git checkout . && git clean -fd`
 
 ### 4. Agent — try a premium model
 
-**Claude Sonnet 4.5**, same prompt. Review again. Reset again.
+**Claude Opus 5**, same prompt. Review again. Reset again.
 
 You now have four data points across two exercises: {weak, strong} model ×
 {no instructions, instructions}, all building the same feature. Which axis moved
