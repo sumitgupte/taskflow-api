@@ -223,6 +223,20 @@ statement_slide(
 The day is built as an experiment: the same feature gets built three times, varying one input at a time. That is the only way the comparison means anything.""")
 
 bullets_slide(
+    "Commit before you switch branches",
+    [("Files you create are untracked", "and `git switch` leaves untracked files exactly where they are"),
+     ("Ex 1 → Ex 2 fails silently", "Your overview and instructions follow you. Exercise 2 then runs *with* instructions."),
+     ("Ex 3 → Ex 4 fails loudly", "`git switch` aborts — exercise-4 tracks docs/coding-guidelines.md"),
+     ("The fix, both times", "git add -A && git commit  →  git switch  →  git status")],
+    eyebrow="Housekeeping",
+    kicker="After every switch: git status. Clean means you're actually on the start state.",
+    notes="""THE MOST LIKELY THING TO GO WRONG TODAY. Say it at the end of Exercise 1, not just Exercise 3 — the Exercise 1 case is the dangerous one precisely because it is silent.
+
+If a table reports that their Exercise 2 output looks suspiciously well-structured — follows the existing patterns, does not invent a scheduler — have them run `git status` and `ls .github/` before you believe anything else. Odds are they are still carrying Exercise 1's instructions file and are not running the exercise at all.
+
+The handouts and each branch's README both carry the commit-then-switch instruction now, but people skim.""")
+
+bullets_slide(
     "How today works",
     [("One codebase", "TaskFlow API — small enough to read in fifteen minutes, real enough to break"),
      ("One ticket, built three times", "Exercises 2, 3 and 4 all build the same reminders feature"),

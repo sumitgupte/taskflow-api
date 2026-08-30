@@ -133,6 +133,22 @@ Third time, new chat. Now compare all three answers side by side.
 
 ---
 
+## Before you switch branches
+
+**Commit your work first.** The files you just created — `PROJECT_OVERVIEW.md`
+and `.github/copilot-instructions.md` — are not tracked by git yet, and
+**`git switch` does not remove untracked files.** They will follow you onto
+`exercise-2` and quietly break it: that exercise is meant to run with *no*
+instructions file at all, and nothing will tell you it didn't.
+
+```bash
+git add -A && git commit -m "ex1: instructions and overview"
+git switch exercise-2
+```
+
+Committing keeps your work safely on `exercise-1` and leaves `exercise-2` clean.
+Check with `git status` after switching — it should report nothing to commit.
+
 ## Takeaway
 
 Behavioral instructions are cheap and change the packaging. Structural

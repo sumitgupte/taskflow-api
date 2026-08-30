@@ -160,6 +160,31 @@ switch and be caught up instantly:
 git checkout . && git clean -fd     # reset within an exercise
 ```
 
+### Untracked files follow people across branches
+
+**The most likely thing to go wrong on the day.** Files participants create
+during an exercise are untracked, and `git switch` does not touch untracked
+files — so they land on the next branch and change its starting state.
+
+| Switch | What happens |
+|--------|--------------|
+| Ex 1 → Ex 2 | `PROJECT_OVERVIEW.md` and `.github/copilot-instructions.md` follow them. **Exercise 2 then runs *with* instructions and nobody notices** — the entire "no instructions" premise is silently void. |
+| Ex 3 → Ex 4 | `git switch` aborts: *"untracked working tree files would be overwritten by checkout"*, because `exercise-4` tracks `docs/coding-guidelines.md`. Loud, but derails the transition. |
+
+The fix for both is to commit before switching, which the handouts now say
+explicitly and the branch README repeats:
+
+```bash
+git add -A && git commit -m "ex1: instructions and overview"
+git switch exercise-2
+git status          # clean = correct
+```
+
+**Say this out loud at the end of Exercise 1**, not just Exercise 3 — the
+Exercise 1 case is the dangerous one precisely because it fails silently. If a
+table reports that Exercise 2's output looks suspiciously well-structured, have
+them run `git status` and `ls .github/` before you believe anything else.
+
 ---
 
 ## Exercise 1 — answer key

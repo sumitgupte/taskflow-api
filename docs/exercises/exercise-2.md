@@ -143,6 +143,17 @@ That last one is a preview of Exercise 4.
 
 ---
 
+## Before you switch branches
+
+**Commit first**, as you did after each run. Anything still untracked follows
+you onto the next branch instead of being left behind here.
+
+```bash
+git add -A && git commit -m "ex2: my attempts"
+git switch exercise-3
+git status          # should be clean
+```
+
 ## Takeaway
 
 Vibe coding is fast at producing *something* and unreliable at producing the

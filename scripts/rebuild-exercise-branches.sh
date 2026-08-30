@@ -128,6 +128,16 @@ set_readme_nav() {
       print "tickets for the others live on their own branches (`exercise-1` … `exercise-4`)."
       print "You do not need to have finished this one to switch to the next; each branch"
       print "is a known-good starting point."
+      print ""
+      print "**Commit before you switch branches.** Files you create during an exercise"
+      print "are untracked, and `git switch` leaves untracked files on disk — so they"
+      print "follow you to the next exercise and break its starting assumptions."
+      print ""
+      print "```bash"
+      print "git add -A && git commit -m \"ex" n ": my work\""
+      print "git switch exercise-<next>"
+      print "git status          # should be clean"
+      print "```"
       skip = 1
       next
     }

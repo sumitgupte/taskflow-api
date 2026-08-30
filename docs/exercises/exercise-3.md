@@ -171,6 +171,19 @@ git add -A && git commit -m "ex3: with instructions and guidelines"
 
 ---
 
+## Before you switch branches
+
+**Commit first.** Your `docs/coding-guidelines.md` is untracked, and
+`exercise-4` ships a tracked file at that exact path — so `git switch` will
+refuse outright with *"untracked working tree files would be overwritten by
+checkout"*. Committing resolves it, and keeps your version on `exercise-3`
+where you can diff it against the one Exercise 4 provides.
+
+```bash
+git add -A && git commit -m "ex3: guidelines and best attempt"
+git switch exercise-4
+```
+
 ## Takeaway
 
 Instructions turn your review comments into something enforced before the code
