@@ -49,21 +49,24 @@ previous branch's instructions file.
 
 ## The exercises
 
-<!-- EXERCISE-NAV-START -->
-Each exercise lives on its own branch that already contains everything that
-exercise needs — and nothing it doesn't.
+**You are on branch `exercise-1` — Exercise 1: Exploring a code base with and without instructions**
 
-| # | Branch | Title | Handout |
-|---|--------|-------|---------|
-| 1 | `exercise-1` | Exploring a code base with and without instructions | [docs/exercises/exercise-1.md](docs/exercises/exercise-1.md) |
-| 2 | `exercise-2` | Vibe code a feature without instructions | [docs/exercises/exercise-2.md](docs/exercises/exercise-2.md) |
-| 3 | `exercise-3` | Implementing a feature ad-hoc with instructions | [docs/exercises/exercise-3.md](docs/exercises/exercise-3.md) |
-| 4 | `exercise-4` | Using a refine → plan → implement cycle | [docs/exercises/exercise-4.md](docs/exercises/exercise-4.md) |
+Your handout: [docs/exercises/exercise-1.md](docs/exercises/exercise-1.md)
+
+This branch contains only what Exercise 1 needs. The handouts and
+tickets for the others live on their own branches (`exercise-1` … `exercise-4`).
+You do not need to have finished this one to switch to the next; each branch
+is a known-good starting point.
+
+**Commit before you switch branches.** Files you create during an exercise
+are untracked, and `git switch` leaves untracked files on disk — so they
+follow you to the next exercise and break its starting assumptions.
 
 ```bash
-git switch exercise-1     # start here
+git add -A && git commit -m "ex1: my work"
+git switch exercise-<next>
+git status          # should be clean
 ```
-<!-- EXERCISE-NAV-END -->
 
 **Exercises 2, 3 and 4 all build the same feature** — task reminders — by three
 different processes: vibe coding, ad-hoc with instructions, and a
@@ -252,14 +255,11 @@ seeded data back exactly as above.
 
 ## Useful commands
 
-<!-- COMMANDS-START -->
 ```bash
 ./mvnw test                 # run the test suite
 ./mvnw spring-boot:run      # start the API on :3000
 ./mvnw spotless:apply       # auto-format (Google Java Format)
-./scripts/fitness.sh        # run every quality gate at once
 ```
-<!-- COMMANDS-END -->
 
 ## Notes
 
