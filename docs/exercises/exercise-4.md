@@ -1,6 +1,6 @@
 # Exercise 4 — Using a refine → plan → implement cycle
 
-**Time:** ~45 minutes · **Branch:** `exercise-4`
+**Time:** ~35 minutes · **Branch:** `exercise-4`
 
 ## Learning objectives
 
@@ -26,6 +26,11 @@ before the next runs:
 
 This branch ships all three as reusable prompt files in `.github/prompts/`, so
 you can invoke them with `/refine`, `/plan`, `/implement` in Copilot Chat.
+
+> **Pace:** Refine 13, Plan 9, Implement 13. **You will not finish the feature,
+> and that is the intended outcome** — the exercise is the cycle, not the
+> reminder system. The failure mode is rushing Refine to "get to the real work",
+> which is the exact habit this exercise exists to break.
 
 > **IntelliJ:** prompt files live under *Settings → Languages & Frameworks →
 > GitHub Copilot → Customizations → Prompt Files*, and slash-command invocation
@@ -167,21 +172,26 @@ The Exercise 2 code probably answers all six too. The difference isn't how many
 got answered — it's that yours are written down in a spec somebody reviewed, so
 you can tell whether they're right.
 
-### 5. New feature — run the cycle again
+### 5. When is this cycle *not* worth it?
 
-Pick a second ticket and run all three stages again, faster now that you know
-the shape:
+Open the other two tickets — don't run the cycle on them, just read them:
 
 - [docs/tickets/rate-limiting.md](../tickets/rate-limiting.md) — already
-  half-refined, so you'll feel what a good Refine output buys the Plan stage.
+  half-refined.
 - [docs/tickets/task-listing-performance.md](../tickets/task-listing-performance.md)
-  — fully scoped, no ambiguity. Go straight to Plan and notice how much less
-  the Refine stage had left to do.
+  — fully scoped, no ambiguity at all.
 
-Comparing these two against the reminders ticket is the actual lesson: the
-value of the cycle scales with how vague the ticket was to begin with. On a
-crisp ticket, Refine is nearly free and nearly pointless. On a one-liner, it's
-the only thing that makes the rest work.
+**For each, ask: what would Refine actually find here?** On the performance
+ticket, close to nothing — you'd go straight to Plan.
+
+That's the real lesson, and it's the one people get wrong when they take this
+home: **the value of the cycle scales with how vague the ticket was to begin
+with.** On a crisp ticket, Refine is nearly free and nearly pointless. On a
+one-liner, it's the only thing that makes the rest work. It is not a ritual to
+perform on every change.
+
+> Finished the implement stage early? Run the cycle properly on
+> `rate-limiting.md` rather than just reading it.
 
 ### 6. Go further
 
@@ -208,6 +218,9 @@ drifts off the plan halfway through. Things that help:
 ---
 
 ## Debrief questions
+
+*Five minutes. Your facilitator will pick two — the first one is the one that
+matters most.*
 
 1. Same ticket, three processes. How much of the difference between them is the
    process, and how much is just that you spent longer on this one?

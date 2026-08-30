@@ -39,6 +39,7 @@ git switch "$BASE"
 strip_facilitator_only() {
   rm -rf docs/facilitator
   rm -f scripts/rebuild-exercise-branches.sh scripts/import-zips-to-git.sh
+  rm -f scripts/build-facilitator-deck.py
 }
 
 # Everything Exercise 1 teaches participants to write, and Exercise 2 must not

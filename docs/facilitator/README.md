@@ -4,22 +4,59 @@
 
 ## Run of show
 
+**Total: 2h25.** The longer 3h30 shape is preserved in git history if you ever
+get the bigger slot.
+
 | | Block | Mins | Branch |
 |-|-------|------|--------|
-| | Intro: what Copilot is doing under the hood | 20 | — |
-| **1** | Exploring a code base with and without instructions | 25 | `exercise-1` |
-| | Debrief 1 | 10 | |
-| **2** | Vibe code a feature without instructions | 30 | `exercise-2` |
-| | Debrief 2 | 10 | |
-| | *Break* | 15 | |
+| | Intro: what Copilot is doing under the hood | 10 | — |
+| **1** | Exploring a code base with and without instructions | 20 | `exercise-1` |
+| | Debrief 1 | 5 | |
+| **2** | Vibe code a feature without instructions | 20 | `exercise-2` |
+| | Debrief 2 | 5 | |
+| | *Break* | 10 | |
 | **3** | Implementing a feature ad-hoc with instructions | 30 | `exercise-3` |
-| | Debrief 3 | 10 | |
-| **4** | Refine → plan → implement cycle | 45 | `exercise-4` |
-| | Debrief 4 + close | 15 | |
+| | Debrief 3 | 5 | |
+| **4** | Refine → plan → implement cycle | 35 | `exercise-4` |
+| | Debrief 4 + close | 5 | |
 
-Roughly 3h30 including breaks. Exercise 4 is the one to protect if you're
-running late — cut Exercise 2's step 5 (the repeat run) before you cut anything
-in Exercise 4.
+This shape deliberately protects the back half: **Exercise 3 keeps its full 30
+minutes and all four runs**, and Exercise 4 loses only 10. The compression falls
+on the intro, Exercises 1 and 2, and the debriefs.
+
+Exercise 4 is still the one to protect if you're running late. Take the time out
+of Exercise 3's step 6 before you touch Refine.
+
+### What the short slot changed
+
+| Cut | Was | Now |
+|-----|-----|-----|
+| Ex 2 step 5 — the repeat run | Every table ran the same prompt a third time | **You run it once on the projector.** The non-determinism point still lands; it costs 3 minutes instead of 7. |
+| Ex 4 step 5 — the second ticket | Full refine → plan → implement on a second ticket | **A reading-and-discussion step.** They open `rate-limiting.md` and `task-listing-performance.md` and answer "what would Refine even find here?" |
+| Debriefs | 10–15 minutes, four questions | **5 minutes, two questions.** Each handout marks which one matters most. |
+
+Exercise 3 is untouched. Its four runs are what produce the "model choice moved
+quality more than the instructions did" finding, and that finding is what makes
+the Exercise 4 pivot land.
+
+The intro drops from 20 to 10. Cut the tooling tour, not the
+behavioral-vs-structural distinction — Exercise 1 is unintelligible without it.
+
+### The one thing you now have to do
+
+**Exercise 2, step 5 — run it yourself, on the projector.** Same prompt, same
+model as step 4, a third time. Have your step-4 output still open and diff the
+two live. The handout tells participants to expect this from you, so if you skip
+it the step vanishes entirely.
+
+### Debriefs are five minutes
+
+That is two questions, not four. Each handout now marks the one that matters
+most, and the deck's debrief slides star it. Ask the starred question, take two
+or three answers, pick one more, move on.
+
+Overrunning a debrief is the only way this shape breaks — there is nowhere left
+to borrow from.
 
 ## The arc
 
@@ -194,8 +231,12 @@ when it fires, no-`dueDate`, already-`done`, one-shot vs repeating, and who can
 see them. **Every implementation answers all six.** The point to land: the model
 didn't skip those decisions, it made them silently and differently every run.
 
-**The step 5 point (same prompt, same model, different result)** is easy to
-rush past. Make people actually diff it. "It worked when I tried it" dies here.
+**The step 5 point (same prompt, same model, different result)** is now yours to
+demonstrate on the projector rather than theirs to run. Keep your step-4 output
+open and diff the two live. Do not summarise it — they have to see two runs of
+an identical prompt disagreeing about what a reminder is. "It worked when I
+tried it" dies here, and it dies faster on a projector than in twenty separate
+windows.
 
 **The step 6 point (latent knowledge).** Three words — "using TDD" — restructure
 the output. Nobody explained TDD to the model. Emphasise that the leverage was
@@ -242,7 +283,7 @@ proportion to the strength of your automated gates. A repo with no
 
 ## Exercise 4 — answer key
 
-**Expected time split:** Refine 15, Plan 10, Implement 15, and they will not
+**Expected time split:** Refine 13, Plan 9, Implement 13, and they will not
 finish the feature. Say so up front, twice. The failure mode is a table
 rushing Refine to "get to the real work", which is exactly the habit the
 exercise exists to break.
@@ -261,12 +302,15 @@ Watch for "3. Implement the reminder service" — that's the tell.
 - Drifts off the plan around step 3 and starts designing something else.
 - Implements steps 1–5 in one turn, so nothing was verified independently.
 
-**Step 5 (second ticket) is the comparison that makes the point.**
-`task-listing-performance.md` is fully scoped, so Refine finds almost nothing —
-which shows the cycle's value is proportional to the ticket's vagueness, not a
-ritual to perform on everything. If time is short, have half the room take
-rate-limiting and half take performance, then compare Refine outputs across the
-two.
+**Step 5 is a reading step in this slot, not a lab** — there is no time to run
+the cycle twice. They read `rate-limiting.md` and `task-listing-performance.md`
+and answer "what would Refine find here?". The answer for the performance ticket
+is "almost nothing", which is exactly the point: the cycle's value is
+proportional to the ticket's vagueness, not a ritual to perform on everything.
+
+Land that explicitly. It is the single most important thing for adoption back at
+their desks — a room that leaves believing every change needs a three-stage
+cycle will abandon the whole idea within a fortnight.
 
 **Step 6** is a discussion, not a lab. The plan-adherence answers you're
 fishing for: one step per turn, plan lives in the repo and gets checked off as

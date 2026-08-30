@@ -1,6 +1,6 @@
 # Exercise 1 — Exploring a code base with and without instructions
 
-**Time:** ~25 minutes · **Branch:** `exercise-1`
+**Time:** ~20 minutes · **Branch:** `exercise-1`
 
 ## Learning objectives
 
@@ -19,6 +19,10 @@ routinely conflate them:
   the architecture, the conventions, the files that matter.
 
 You're going to feel the difference by asking the same question three times.
+
+> **Pace:** about 4 minutes per ask, 6 for the overview in Step 5. If you are
+> still hand-editing `PROJECT_OVERVIEW.md` after 6 minutes, stop and move on —
+> a partially-corrected overview makes the Step 6 comparison just as well.
 
 ---
 
@@ -98,7 +102,8 @@ responsibility, the auth model, and the known limitations. Be specific
 and reference real file paths. Do not invent features that don't exist.
 ```
 
-Review what it generates — **do not accept it blind.** Check at least:
+Review what it generates — **do not accept it blind.** You are not proofreading
+the whole file — check these three claims specifically and fix what's wrong:
 
 - Does the described request flow match `TaskController` → `TaskService` → `InMemoryDatabase`?
 - Did it correctly describe how `AuthInterceptor` passes `userId` downstream?
@@ -129,6 +134,9 @@ Third time, new chat. Now compare all three answers side by side.
 ---
 
 ## Debrief questions
+
+*Five minutes. Your facilitator will pick two — the first one is the one that
+matters most.*
 
 1. Which step changed the answer more — the behavioral rule or the structural one?
 2. Your Step 5 overview was written *by* Copilot, from the same code it already

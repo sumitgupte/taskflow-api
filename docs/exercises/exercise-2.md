@@ -1,6 +1,6 @@
 # Exercise 2 — Vibe code a feature without instructions
 
-**Time:** ~30 minutes · **Branch:** `exercise-2`
+**Time:** ~20 minutes · **Branch:** `exercise-2`
 
 ## Learning objectives
 
@@ -25,6 +25,10 @@ to this run for the rest of the day.
 
 This branch has **no instructions file**. Whatever Copilot produces, it produces
 from the raw code alone.
+
+> **Pace:** three runs of your own, roughly 6 minutes each including the review.
+> Don't wait for a run to finish perfectly — if it is still going at 4 minutes
+> you have seen enough to review what it has already written.
 
 ---
 
@@ -103,17 +107,16 @@ git add -A && git commit -m "ex2: premium model, no instructions"
 git switch exercise-2 && git checkout . && git clean -fd
 ```
 
-### 5. Agent — the same prompt, again
+### 5. Watch the same prompt run a third time
 
-```
-Add reminders for tasks so users get notified before a task is due.
-```
+**Your facilitator runs this one on the projector** — same prompt, same model as
+Step 4, a third time. You don't need to run it yourself.
 
-Third run, same model as Step 4. **Is the result the same?** It won't be. Two
-runs of the same prompt will disagree about what a reminder even is.
+**Is the result the same?** It won't be. Two runs of the same prompt will
+disagree about what a reminder even is.
 
 Non-determinism isn't a bug you can prompt away, and it's why "it worked when I
-tried it" is not evidence. Reset again.
+tried it" is not evidence. Reset your own tree while you watch.
 
 ### 6. Agent — activate latent knowledge
 
@@ -130,7 +133,7 @@ test, or in what order. The model already knew — the prompt just reached for
 knowledge that was sitting there unused. That's **activating latent knowledge**,
 and it's the cheapest prompt improvement available to you.
 
-Try one or two more and see what else is latent:
+If you have time in hand, try one more and see what else is latent:
 
 - `Add reminders for tasks. Follow the existing patterns in this codebase.`
 - `Add reminders for tasks. Think about what happens to tasks with no due date.`
@@ -142,7 +145,10 @@ That last one is a preview of Exercise 4.
 
 ## Debrief questions
 
-1. Across your four attempts, how many produced a reminder feature you'd merge?
+*Five minutes. Your facilitator will pick two — the second one is the one that
+matters most.*
+
+1. Across your attempts, how many produced a reminder feature you'd merge?
 2. Did any two runs agree on what "reminder" meant? If not, whose fault is that?
 3. Which was the bigger lever — changing the model, or changing the prompt?
 4. You reviewed generated code four times. How long did that take, and how does

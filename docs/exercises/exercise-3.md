@@ -173,6 +173,9 @@ git add -A && git commit -m "ex3: with instructions and guidelines"
 
 ## Debrief questions
 
+*Five minutes. Your facilitator will pick two — the first one is the one that
+matters most, and it sets up Exercise 4.*
+
 1. Rank all the runs across Exercises 2 and 3. What's the ordering, and what
    does it say about where to spend your effort?
 2. Which guideline did the model violate anyway? What would catch it
