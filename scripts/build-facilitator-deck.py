@@ -604,7 +604,7 @@ bullets_slide(
     "Debrief 4",
     ["★  Same ticket, three processes. How much is the process, and how much is just spending longer?",
      "Which of the three stages was hardest not to skip under time pressure?",
-     "Refine took 15 minutes and produced no code. Sell that to a sceptical colleague in two sentences.",
+     "Refine took 13 minutes and produced no code. Sell that to a sceptical colleague in two sentences.",
      "Where's the cutoff? What size of change is not worth this cycle?"],
     eyebrow="Exercise 4 · debrief",
     notes="""FIVE MINUTES, and it is the last thing before the close — do not let it sprawl.

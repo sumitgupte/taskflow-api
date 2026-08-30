@@ -133,19 +133,6 @@ Third time, new chat. Now compare all three answers side by side.
 
 ---
 
-## Debrief questions
-
-*Five minutes. Your facilitator will pick two — the first one is the one that
-matters most.*
-
-1. Which step changed the answer more — the behavioral rule or the structural one?
-2. Your Step 5 overview was written *by* Copilot, from the same code it already
-   had access to. Why does feeding it back as an instruction help at all?
-3. What did you have to correct in the generated overview? What does that tell
-   you about trusting a `PROJECT_OVERVIEW.md` nobody reviewed?
-4. Behavioral instructions cost tokens on every single request. Which of the two
-   rules you tried in Step 3 would you actually keep, and why?
-
 ## Takeaway
 
 Behavioral instructions are cheap and change the packaging. Structural

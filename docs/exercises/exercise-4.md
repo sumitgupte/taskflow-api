@@ -217,18 +217,6 @@ drifts off the plan halfway through. Things that help:
 
 ---
 
-## Debrief questions
-
-*Five minutes. Your facilitator will pick two — the first one is the one that
-matters most.*
-
-1. Same ticket, three processes. How much of the difference between them is the
-   process, and how much is just that you spent longer on this one?
-2. Which of the three stages was hardest to not skip under time pressure?
-3. Refine took 15 minutes and produced no code. Sell that to a sceptical
-   colleague in two sentences.
-4. Where's the cutoff? What size of change is *not* worth this cycle?
-
 ## Takeaway
 
 Refine decides what's true. Plan decides what order. Implement is the part

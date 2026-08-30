@@ -143,17 +143,6 @@ That last one is a preview of Exercise 4.
 
 ---
 
-## Debrief questions
-
-*Five minutes. Your facilitator will pick two — the second one is the one that
-matters most.*
-
-1. Across your attempts, how many produced a reminder feature you'd merge?
-2. Did any two runs agree on what "reminder" meant? If not, whose fault is that?
-3. Which was the bigger lever — changing the model, or changing the prompt?
-4. You reviewed generated code four times. How long did that take, and how does
-   it compare to the time the generation saved?
-
 ## Takeaway
 
 Vibe coding is fast at producing *something* and unreliable at producing the

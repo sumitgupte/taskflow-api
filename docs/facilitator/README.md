@@ -33,7 +33,7 @@ of Exercise 3's step 6 before you touch Refine.
 |-----|-----|-----|
 | Ex 2 step 5 — the repeat run | Every table ran the same prompt a third time | **You run it once on the projector.** The non-determinism point still lands; it costs 3 minutes instead of 7. |
 | Ex 4 step 5 — the second ticket | Full refine → plan → implement on a second ticket | **A reading-and-discussion step.** They open `rate-limiting.md` and `task-listing-performance.md` and answer "what would Refine even find here?" |
-| Debriefs | 10–15 minutes, four questions | **5 minutes, two questions.** Each handout marks which one matters most. |
+| Debriefs | 10–15 minutes, four questions | **5 minutes, two questions**, run from the deck. The questions have been removed from the handouts so people are looking up, not reading ahead. |
 
 Exercise 3 is untouched. Its four runs are what produce the "model choice moved
 quality more than the instructions did" finding, and that finding is what makes
@@ -51,9 +51,12 @@ it the step vanishes entirely.
 
 ### Debriefs are five minutes
 
-That is two questions, not four. Each handout now marks the one that matters
-most, and the deck's debrief slides star it. Ask the starred question, take two
-or three answers, pick one more, move on.
+That is two questions, not four. **The questions live only in the deck now** —
+the handouts no longer carry them, so the room is looking at you rather than
+reading four questions ahead while you ask the first.
+
+Each debrief slide stars the one that matters most. Ask the starred question,
+take two or three answers, pick one more, move on.
 
 Overrunning a debrief is the only way this shape breaks — there is nowhere left
 to borrow from.
