@@ -76,7 +76,12 @@ syntax, so attach the file via *Add context* instead, or just paste the path):
 Read #file:docs/tickets/reminders.md. Identify gaps or ambiguities in the
 requirements. Focus on user-facing behavior. Check the actual codebase for
 constraints the ticket ignores. Do not propose an implementation yet.
+Write the result to docs/tickets/reminders-spec.md — that file is the only
+one you may create. Do not touch any source file.
 ```
+
+> **Be in Agent mode.** Ask mode cannot write files, so the spec will only ever
+> appear in the chat window and Step 3 will have nothing to read.
 
 Then force the decisions rather than letting them stay implicit:
 
@@ -95,7 +100,9 @@ of justification. I'll override the ones I disagree with.
 - One-shot, or repeating until done?
 - Who can see or manage another user's reminders?
 
-**Output:** a spec of 5–10 bullets, saved to `docs/tickets/reminders-spec.md`.
+**Output:** `docs/tickets/reminders-spec.md`, written by the agent — check it
+exists before moving on (`ls docs/tickets/`). If it doesn't, you were in Ask
+mode, which cannot write files; switch to Agent and re-run.
 Where your pair disagreed, write down the decision anyway. An assumption you
 made on purpose is fine; one you didn't notice you were making is the bug.
 
@@ -113,6 +120,8 @@ Based on #file:docs/tickets/reminders-spec.md, create detailed implementation
 instructions for this requirement. For each step give: the files affected,
 new or modified, and how I verify that step works before starting the next.
 Follow the existing patterns in this codebase. Do not write code yet.
+Write the plan to docs/tickets/reminders-plan.md — that file is the only one
+you may create.
 ```
 
 Then pressure-test it before you trust it:
@@ -126,7 +135,8 @@ coverage, and steps that depend on an assumption we never confirmed.
 for is not a step. `Implement the reminder feature` is not a step — it's the
 ticket with different punctuation.
 
-**Output:** a numbered plan in `docs/tickets/reminders-plan.md`.
+**Output:** `docs/tickets/reminders-plan.md`, written by the agent. Same check
+as before — if the file isn't there, you were in Ask mode.
 
 ### 4. Implement
 

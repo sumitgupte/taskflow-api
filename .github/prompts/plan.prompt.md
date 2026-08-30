@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 description: Turn a refined spec into a reviewable, step-by-step implementation plan
 ---
 
@@ -29,3 +29,12 @@ Produce detailed implementation instructions for this requirement:
 
 5. End with **Assumptions** — every decision the plan depends on that the spec
    did not settle. Be exhaustive here; this list is what I'll check first.
+
+## Output
+
+**Write the plan to a file** next to the spec, named after the ticket: for
+`docs/tickets/reminders-spec.md`, write `docs/tickets/reminders-plan.md`. Then
+tell me the path you wrote.
+
+**That plan file is the only file you may create or modify.** No source files,
+no tests, no configuration — this stage produces a plan, not an implementation.

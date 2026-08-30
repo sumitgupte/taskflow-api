@@ -40,3 +40,6 @@ IMG_*.png
 
 ### macOS ###
 .DS_Store
+
+### Office lock files ###
+~$*

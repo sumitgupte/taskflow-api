@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 description: Interrogate a ticket for gaps and ambiguities before any code exists
 ---
 
@@ -30,3 +30,18 @@ The ticket is: ${input:ticket:path to the ticket file, e.g. docs/tickets/reminde
 Ask me about anything genuinely blocking. Do not silently pick an assumption
 and move on — an assumption made on purpose is fine, one nobody noticed is a
 bug waiting to be shipped.
+
+## Output
+
+**Write the result to a spec file** next to the ticket, named after it: for
+`docs/tickets/reminders.md`, write `docs/tickets/reminders-spec.md`. Structure it:
+
+- **Decisions** — 5–10 bullets, each a settled statement of behaviour
+- **Open questions** — anything that genuinely needs a human to decide
+- **Constraints from the codebase** — what the code forces, with file paths
+
+Then tell me the path you wrote.
+
+**That spec file is the only file you may create or modify.** Do not touch a
+source file, a test, or a configuration file. If you find yourself wanting to
+write code, you are in the wrong stage.

@@ -341,6 +341,13 @@ reminders are visible only to the task owner.
 **A good plan** has a first step that is a *test*, and no step you can't verify.
 Watch for "3. Implement the reminder service" — that's the tell.
 
+**If `/refine` produces no file**, they are in Ask mode. Ask mode cannot write
+to disk, so the spec appears in the chat window and `docs/tickets/` stays empty,
+which then breaks Plan. Both prompt files are `mode: agent` now and name their
+output path explicitly, but a participant who pastes the prompt by hand — which
+every IntelliJ user does — has to pick the mode themselves. **Check at the five
+minute mark that every table has a `reminders-spec.md` on disk.**
+
 **Common implement-stage failures**, all worth calling out:
 
 - Claims `./scripts/fitness.sh` is green without running it. Have them check.
